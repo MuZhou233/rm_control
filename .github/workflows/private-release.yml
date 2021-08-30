@@ -12,6 +12,7 @@ jobs:
           - { ROS_DISTRO: melodic, ROS_REPO: testing }
           - { ROS_DISTRO: melodic, ROS_REPO: main }
     env:
+      BASEDIR: ${{ github.workspace }}/.work
       CCACHE_DIR: /github/home/.ccache # Directory for ccache (and how we enable ccache in industrial_ci)
       SCRIPT_URL: https://raw.githubusercontent.com/gdut-dynamic-x/ci_scripts/master/
     runs-on: ubuntu-latest
