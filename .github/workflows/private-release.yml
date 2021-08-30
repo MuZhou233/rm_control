@@ -7,9 +7,7 @@ jobs:
     strategy:
       matrix:
         env:
-          - { ROS_DISTRO: noetic, ROS_REPO: testing }
           - { ROS_DISTRO: noetic, ROS_REPO: main }
-          - { ROS_DISTRO: melodic, ROS_REPO: testing }
           - { ROS_DISTRO: melodic, ROS_REPO: main }
     env:
       BASEDIR: ${{ github.workspace }}/.work
@@ -31,7 +29,7 @@ jobs:
           ROS_DISTRO: ${{ matrix.env.ROS_DISTRO }}
           ROS_REPO: ${{ matrix.env.ROS_REPO }}
           AFTER_SETUP_ROSDEP: 'apt install -y -qq curl && curl ${{ env.SCRIPT_URL }}init.sh | bash -s ${{ secrets.REPO_URL }}'
-          AFTER_RUN_TARGET_TEST: 'cd ${BASEDIR}/target_ws/build && make install'
+          AFTER_RUN_TARGET_TEST: 'cd ${BASEDIR}/target_ws/build && cat MakeFile && make install'
           AFTER_SCRIPT: 'apt install -y -qq curl && curl ${{ env.SCRIPT_URL }}package.sh | bash -s ${{ steps.branch_name.outputs.short_ref }} multi'
       - env:
           ROS_DISTRO: ${{ matrix.env.ROS_DISTRO }}
